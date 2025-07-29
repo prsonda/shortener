@@ -1,3 +1,4 @@
+import { ErrorMessages } from '@/shared/constants/messages';
 import {
   ArgumentsHost,
   Catch,
@@ -22,7 +23,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? exception.getResponse()
-        : 'Erro interno do servidor';
+        : ErrorMessages.internal;
 
     const logger = new Logger(AllExceptionsFilter.name);
     logger.error(exception);
