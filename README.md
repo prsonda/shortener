@@ -1,98 +1,101 @@
+# URL Shortener
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://nestjs.com/" target="_blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="NestJS Logo" />
+  </a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+</p> <p align="center"> A REST API built with <strong>NestJS</strong> for shortening URLs. It includes user authentication, access tracking, and link management. Supports creation, listing, updating, and logical deletion of URLs, with a focus on scalability and security. </p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Technologies and Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Node.js**
+- **NestJS** (TypeScript)
+- **Helmet**
+- **CORS**
+- **HPP**
+- **@nestjs/throttler**
+- **class-validator / class-transformer**
+- **compression**
+- **Winston**
+- **Swagger**
 
-## Project setup
+## Main Endpoints
 
-```bash
-$ yarn install
+```http
+GET /docs — Access the API documentation
 ```
 
-## Compile and run the project
+(Endpoints will be expanded as the project evolves)
 
-```bash
-# development
-$ yarn run start
+## Security
 
-# watch mode
-$ yarn run start:dev
+- Helmet with custom CSP policies to restrict content sources and prevent XSS attacks
+- Additional security headers: X-Content-Type-Options: nosniff, Referrer-Policy: no-referrer, Frameguard: deny, and others
+- Payload size limit of 1MB for JSON and URL-encoded bodies to prevent DoS attacks
+- Input validation with whitelist and forbidden non-whitelisted properties using global ValidationPipe
+- Rate limiting set to 100 requests per IP every 60 seconds
+- Protection against HTTP Parameter Pollution (HPP)
+- CORS restricted to the domain defined in the `BASE_URL` environment variable
+- X-Powered-By header disabled to avoid exposing the tech stack
 
-# production mode
-$ yarn run start:prod
+## Validation
+
+- Automated input validation using `class-validator`.
+- Custom and clear error responses through a global `ValidationPipe`
+- Automatic data transformation to expected types
+
+## Logging and Error Handling
+
+- Custom logger with Winston
+- Replaces NestJS `LoggerService` with Winston to capture all logs
+- Global exception logging through `AllExceptionsFilter`
+
+## Optimization and Performance
+
+- HTTP response compression using `compression` middleware
+- Modular structure with efficient module loading
+- Global exception handling for consistency
+
+## Documentation with Swagger
+
+- The API is fully documented using Swagger (OpenAPI).
+
+Accessible at:
+
+```http
+GET /api/docs
 ```
 
-## Run tests
+## Requirements
+
+- **Node.js** version 22.17.1
+- This project includes a `.nvmrc` file to ease Node version management with NVM
+- It is recommended to use [NVM](https://github.com/nvm-sh/nvm)
+
+To activate the correct Node version:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+nvm use
 ```
 
-## Deployment
+## Environment Variables
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+To run this project, you need the following variables in your `.env` file:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+`PORT`
+`BASE_URL`
+`DATABASE_URL`
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
-```
+## Author
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+- Paulo Silva — Back-End Developer
+  [LinkedIn](https://www.linkedin.com/in/paulors1206) | [GitHub](https://github.com/prsonda)
 
-## Resources
+## License © 2025 Paulo Silva
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- This project was developed exclusively for technical evaluation purposes
+- Any commercial use, redistribution, or modification without the author's explicit permission is prohibited
