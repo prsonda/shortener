@@ -3,9 +3,12 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './infra/http/filters/all-exceptions.filter';
 import { SecureMiddleware } from './infra/http/middlewares/secure.middleware';
+import { logger } from './infra/logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger,
+  });
 
   app.useGlobalFilters(new AllExceptionsFilter());
   app.disable('x-powered-by');
