@@ -1,11 +1,16 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './infra/http/filters/all-exceptions.filter';
+import { SecureMiddleware } from './infra/http/middlewares/secure.middleware';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.useGlobalFilters(new AllExceptionsFilter());
+  app.disable('x-powered-by');
+  const secureMiddleware = new SecureMiddleware();
+  app.use(secureMiddleware.use.bind(secureMiddleware));
 
   const baseUrl = process.env.BASE_URL;
 
