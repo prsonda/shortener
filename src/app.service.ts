@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { ErrorMessages } from './shared/constants/messages';
 
 @Injectable()
 export class AppService {
-  private readonly version: string;
-
-  constructor() {
-    const packageJsonPath = join(__dirname, '..', 'package.json');
-    const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
-    this.version = packageJson.version;
-  }
-
   getVersion(): { version: string } {
-    return { version: this.version };
+    try {
+      const packageJsonPath = join(__dirname, '..', 'package.json');
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+      return { version: packageJson.version };
+    } catch {
+      return { version: ErrorMessages.unknown };
+    }
   }
 }

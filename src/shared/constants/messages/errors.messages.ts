@@ -8,4 +8,5 @@ export const ErrorMessages = {
   serviceUnavailable: 'Service temporarily unavailable',
   validationFailed: 'Validation failed for one or more fields',
   methodNotAllowed: 'Method not allowed',
+  unknown: 'unknown',
 };
