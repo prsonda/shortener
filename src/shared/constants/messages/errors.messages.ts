@@ -1,7 +1,7 @@
 export const ErrorMessages = {
   badRequest: 'Bad request',
   unauthorized: 'Unauthorized',
-  forbidden: 'Forbidden',
+  forbidden: 'Access denied',
   notFound: 'Resource not found',
   conflict: 'Conflict: resource already exists',
   internal: 'Internal server error',
