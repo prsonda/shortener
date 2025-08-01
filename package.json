@@ -1,6 +1,6 @@
 {
   "name": "shortener",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "API para encurtamento de URLs com autenticação e métricas",
   "author": "Paulo Silva",
   "private": true,
