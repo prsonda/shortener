@@ -1,5 +1,6 @@
 import { BcryptService } from '@/modules/auth/infrastructure/bcrypt.service';
-import { Injectable } from '@nestjs/common';
+import { ErrorMessages } from '@/shared/constants/messages';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { DateTime } from 'luxon';
 import { UserEntity } from '../../domain/user.entity';
@@ -19,9 +20,16 @@ export class UserCreateUseCase {
     user.id = randomUUID();
     user.name = dto.name;
     user.email = dto.email;
-    user.password = await this.bcryptService.hash(dto.password);
+
+    try {
+      user.password = await this.bcryptService.hash(dto.password);
+    } catch (error) {
+      throw new InternalServerErrorException(ErrorMessages.hash);
+    }
+
     user.createdAt = DateTime.now().toJSDate();
     user.updatedAt = DateTime.now().toJSDate();
+    user.deletedAt = null;
 
     return await this.userRepository.create(user);
   }
