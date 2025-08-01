@@ -20,13 +20,21 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const message =
+    const res =
       exception instanceof HttpException
         ? exception.getResponse()
         : ErrorMessages.internal;
 
+    const message =
+      typeof res === 'string'
+        ? res
+        : typeof res === 'object' && res !== null && 'message' in res
+          ? (res as any).message
+          : ErrorMessages.internal;
+
     const logger = new Logger(AllExceptionsFilter.name);
-    logger.error(exception);
+
+    logger.error(message);
 
     response.status(status).json({
       statusCode: status,
