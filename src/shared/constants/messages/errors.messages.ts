@@ -9,4 +9,5 @@ export const ErrorMessages = {
   validationFailed: 'Validation failed for one or more fields',
   methodNotAllowed: 'Method not allowed',
   unknown: 'unknown',
+  hash: 'error generating hash',
 };
