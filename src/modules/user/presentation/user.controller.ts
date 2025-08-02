@@ -1,7 +1,11 @@
 import { AuthService } from '@/modules/auth/application/auth.service';
 import { JwtAuthGuard } from '@/modules/auth/infrastructure/jwt.guard';
 import { AuthTokenResponseDto } from '@/modules/auth/presentation/dto/auth-response.dto';
-import { DocsMessages, ErrorMessages } from '@/shared/constants/messages';
+import {
+  DocsMessages,
+  ErrorMessages,
+  UserMessages,
+} from '@/shared/constants/messages';
 import {
   Body,
   Controller,
@@ -35,12 +39,12 @@ export class UserController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
-    summary: DocsMessages.user.summary,
-    description: DocsMessages.user.summary,
+    summary: UserMessages.create.summary,
+    description: UserMessages.create.summary,
   })
   @ApiResponse({
-    status: 200,
-    description: DocsMessages.user.success,
+    status: 201,
+    description: UserMessages.create.success,
     type: AuthTokenResponseDto,
   })
   @ApiResponse({
@@ -70,13 +74,13 @@ export class UserController {
   @ApiBearerAuth('Authorization')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: DocsMessages.user.summary,
-    description: DocsMessages.user.summary,
+    summary: UserMessages.get.summary,
+    description: UserMessages.get.summary,
   })
   @ApiResponse({
     status: 200,
-    description: DocsMessages.user.success,
-    type: AuthTokenResponseDto,
+    description: UserMessages.get.success,
+    type: UserResponseDto,
   })
   @ApiResponse({
     status: 400,
@@ -85,6 +89,10 @@ export class UserController {
   @ApiResponse({
     status: 401,
     description: ErrorMessages.unauthorized,
+  })
+  @ApiResponse({
+    status: 403,
+    description: ErrorMessages.forbidden,
   })
   @ApiResponse({
     status: 404,
