@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './infra/database/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ShortenerModule } from './modules/shortener/shortener.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -26,6 +27,7 @@ import { UserModule } from './modules/user/user.module';
     PrismaModule,
     AuthModule,
     UserModule,
+    ShortenerModule,
   ],
   controllers: [AppController],
   providers: [
