@@ -1,3 +1,4 @@
+import { JWT_EXPIRES_IN, JWT_SECRET } from '@/shared/config/env.provider';
 import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -15,8 +16,8 @@ import { AuthController } from './presentation/auth.controller';
     forwardRef(() => UserModule),
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'default_secret',
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN || '1h' },
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: JWT_EXPIRES_IN },
     }),
   ],
   providers: [

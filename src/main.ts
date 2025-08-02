@@ -11,6 +11,8 @@ import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './infra/http/filters/all-exceptions.filter';
 import { SecureMiddleware } from './infra/http/middlewares/secure.middleware';
 import { logger } from './infra/logger/logger.service';
+import { BASE_URL, PORT } from './shared/config/env.provider';
+import { validateEnv } from './shared/config/validate-env';
 import { DocsMessages, ErrorMessages } from './shared/constants/messages';
 
 async function bootstrap() {
@@ -23,7 +25,9 @@ async function bootstrap() {
   const secureMiddleware = new SecureMiddleware();
   app.use(secureMiddleware.use.bind(secureMiddleware));
 
-  const baseUrl = process.env.BASE_URL;
+  validateEnv();
+
+  const baseUrl = BASE_URL;
 
   app.enableCors({
     origin: baseUrl,
@@ -72,6 +76,6 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(PORT ?? 3000);
 }
 bootstrap();

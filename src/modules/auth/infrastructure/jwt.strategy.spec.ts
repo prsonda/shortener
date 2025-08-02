@@ -1,6 +1,10 @@
 import { JwtPayloadDto } from '../presentation/dto/jwt-payload.dto';
 import { JwtStrategy } from './jwt.strategy';
 
+jest.mock('@/shared/config/env.provider', () => ({
+  JWT_SECRET: 'test_secret',
+}));
+
 describe('JwtStrategy', () => {
   let strategy: JwtStrategy;
 
