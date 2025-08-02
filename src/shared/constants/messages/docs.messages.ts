@@ -17,20 +17,8 @@ export const DocsMessages = {
   },
   user: {
     tag: 'User',
-    summary: 'User registration',
-    description: 'Register a new user',
-    success: 'Register successful',
   },
   url: {
-    tag: 'URL',
-    summary: 'Create a new short URL',
-    description: 'Create a new short URL',
-    success: 'URL created successfully',
-  },
-  redirect: {
-    tag: 'Redirect',
-    summary: 'Redirect to original URL',
-    description: 'Redirect to original URL',
-    success: 'Redirect successful',
+    tag: 'URL Shortener',
   },
 };
