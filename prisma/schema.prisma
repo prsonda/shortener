@@ -29,4 +29,8 @@ model Url {
   deletedAt   DateTime?
 
   user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([deletedAt])
+  @@index([createdAt])
 }
