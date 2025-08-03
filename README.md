@@ -119,6 +119,14 @@ JWT_EXPIRES_IN=1h
 
 The above variables are just examples, please change according to your actual environment, passwords must be kept secure and never versioned.
 
+## ⚠️ Important for Windows users
+
+Ensure the `wait-for-it.sh` script uses LF (Unix) end-of-line format. If it's using CRLF (Windows), Docker will fail to execute it.
+
+To fix it:
+
+In VSCode, open `wait-for-it.sh`, click on the bottom-right where it says CRLF, and change to LF.
+
 ## Running with Docker
 
 Docker and docker-compose must be installed.
@@ -133,7 +141,7 @@ docker-compose up --build
 
 The app container waits for the database to be ready before starting, automatically applies migrations, and runs the application.
 
-3. The app will be available on the port defined in PORT (e.g., http://localhost:3000).
+3. The app will be available on the port defined in PORT (e.g., `http://localhost:3000`).
 
 4. To stop and remove containers:
 
